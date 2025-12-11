@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { FiCheckCircle, FiX, FiAlertCircle, FiInfo, FiXCircle } from 'react-icons/fi'
 import { ToastType } from '@/store/toastStore'
 
@@ -14,31 +15,44 @@ const toastConfig = {
     bgColor: 'bg-green-500',
     borderColor: 'border-green-400/50',
     icon: FiCheckCircle,
-    subtitle: 'Sucesso!'
+    subtitle: 'Sucesso!',
+    duration: 3000 // 3 segundos
   },
   error: {
     bgColor: 'bg-red-500',
     borderColor: 'border-red-400/50',
     icon: FiXCircle,
-    subtitle: 'Erro'
+    subtitle: 'Erro',
+    duration: 6000 // 6 segundos - mais tempo para ler erros
   },
   warning: {
     bgColor: 'bg-yellow-500',
     borderColor: 'border-yellow-400/50',
     icon: FiAlertCircle,
-    subtitle: 'Atenção'
+    subtitle: 'Atenção',
+    duration: 5000 // 5 segundos - tempo intermediário para avisos
   },
   info: {
     bgColor: 'bg-blue-500',
     borderColor: 'border-blue-400/50',
     icon: FiInfo,
-    subtitle: 'Informação'
+    subtitle: 'Informação',
+    duration: 4000 // 4 segundos
   }
 }
 
 export default function Toast({ message, type = 'success', onClose }: ToastProps) {
   const config = toastConfig[type]
   const Icon = config.icon
+
+  useEffect(() => {
+    // Auto-remove com duração específica por tipo
+    const timer = setTimeout(() => {
+      onClose()
+    }, config.duration)
+
+    return () => clearTimeout(timer)
+  }, [config.duration, onClose])
 
   return (
     <div className="animate-slide-in w-full">
