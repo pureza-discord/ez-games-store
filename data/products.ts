@@ -124,7 +124,7 @@ export const products: Product[] = [
   {
     id: 'final-fantasy',
     name: "Final Fantasy Ultimate",
-    price: 30.00,
+    price: 40.00,
     description: 'FF VII Remake, VIII, IX, X/X-2, XII, XIII, XV',
     category: 'RPG',
     type: 'pack',
@@ -177,13 +177,23 @@ export const products: Product[] = [
   {
     id: 'indie-pack',
     name: "Mega Pack Indie",
-    price: 30.00,
-    description: '20+ indies: Hollow Knight, Celeste, Dead Cells, Hades, Cuphead, Stardew Valley',
+    price: 50.00,
+    description: 'Os melhores indies: Celeste, Dead Cells, Disco Elysium, Hades I e II, Hollow Knight, Ori',
     category: 'Indie',
     popular: true,
     type: 'pack',
     online: false,
-    games: ['Hollow Knight', 'Celeste', 'Dead Cells', 'Hades', 'Cuphead', 'Stardew Valley']
+    games: [
+      'Celeste',
+      'Dead Cells',
+      'Disco Elysium - The Final Cut',
+      'Hades',
+      'Hades II',
+      'Hollow Knight',
+      'Hollow Knight Skillsong',
+      'Ori and the Blind Forest - Definitive Edition',
+      'Ori and the Will of the Wisps'
+    ]
   },
   {
     id: 'sims-4',
@@ -353,7 +363,7 @@ export const products: Product[] = [
   {
     id: 'cyberpunk',
     name: "Cyberpunk 2077",
-    price: 10.00,
+    price: 12.00,
     description: 'RPG de ação em mundo aberto em Night City',
     category: 'RPG',
     popular: true,
@@ -363,7 +373,7 @@ export const products: Product[] = [
   {
     id: 'witcher-3',
     name: "The Witcher 3",
-    price: 10.00,
+    price: 12.00,
     description: 'Aventura épica de Geralt de Rivia',
     category: 'RPG',
     popular: true,
@@ -393,7 +403,7 @@ export const products: Product[] = [
   {
     id: 'gta-v',
     name: "GTA V",
-    price: 10.00,
+    price: 12.00,
     description: 'O clássico de Los Santos (Modo história)',
     category: 'Ação',
     popular: true,
@@ -403,7 +413,7 @@ export const products: Product[] = [
   {
     id: 'sekiro',
     name: "Sekiro: Shadows Die Twice",
-    price: 10.00,
+    price: 12.00,
     description: 'Desafie seus reflexos no Japão feudal',
     category: 'Ação',
     type: 'individual',
@@ -421,7 +431,7 @@ export const products: Product[] = [
   {
     id: 'resident-evil-4',
     name: "Resident Evil 4 Remake",
-    price: 10.00,
+    price: 15.00,
     description: 'Remake do clássico de terror',
     category: 'Terror',
     popular: true,
@@ -431,7 +441,7 @@ export const products: Product[] = [
   {
     id: 'spider-man-pc',
     name: "Spider-Man Remastered",
-    price: 10.00,
+    price: 12.00,
     description: 'Seja o Homem-Aranha em Nova York',
     category: 'Ação',
     popular: true,
@@ -486,7 +496,7 @@ export const products: Product[] = [
   {
     id: 're-8-village',
     name: "Resident Evil 8 Village",
-    price: 10.00,
+    price: 12.00,
     description: 'A mais nova aventura de Ethan',
     category: 'Terror',
     type: 'individual',
@@ -713,7 +723,7 @@ export const products: Product[] = [
   {
     id: 'god-of-war-2018',
     name: "God of War 2018",
-    price: 10.00,
+    price: 15.00,
     description: 'Kratos e Atreus',
     category: 'Ação',
     popular: true,
@@ -723,7 +733,7 @@ export const products: Product[] = [
   {
     id: 'hollow-knight',
     name: "Hollow Knight",
-    price: 10.00,
+    price: 8.00,
     description: 'Metroidvania aclamado',
     category: 'Indie',
     popular: true,
@@ -733,7 +743,7 @@ export const products: Product[] = [
   {
     id: 'celeste',
     name: "Celeste",
-    price: 10.00,
+    price: 8.00,
     description: 'Plataforma desafiadora',
     category: 'Indie',
     type: 'individual',
