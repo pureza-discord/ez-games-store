@@ -33,7 +33,7 @@ export const products: Product[] = [
     category: 'RPG',
     popular: true,
     type: 'pack',
-    online: false,
+    online: true,
     games: ['Dark Souls I Remastered', 'Dark Souls II Scholar', 'Dark Souls III', 'Elden Ring', 'Sekiro']
   },
   {
@@ -233,7 +233,7 @@ export const products: Product[] = [
     description: 'Dark Souls I Remastered, II Scholar of the First Sin, III',
     category: 'RPG',
     type: 'pack',
-    online: false,
+    online: true,
     games: ['Dark Souls I', 'Dark Souls II', 'Dark Souls III']
   },
   {
@@ -353,12 +353,12 @@ export const products: Product[] = [
   {
     id: 'elden-ring',
     name: "Elden Ring",
-    price: 10.00,
+    price: 15.00,
     description: 'O aclamado RPG de ação dos criadores de Dark Souls',
     category: 'RPG',
     popular: true,
     type: 'individual',
-    online: false
+    online: true
   },
   {
     id: 'cyberpunk',
@@ -417,16 +417,16 @@ export const products: Product[] = [
     description: 'Desafie seus reflexos no Japão feudal',
     category: 'Ação',
     type: 'individual',
-    online: false
+    online: true
   },
   {
     id: 'dark-souls-3',
     name: "Dark Souls III",
-    price: 10.00,
+    price: 12.00,
     description: 'O aclamado RPG de ação desafiador',
     category: 'RPG',
     type: 'individual',
-    online: false
+    online: true
   },
   {
     id: 'resident-evil-4',
@@ -455,7 +455,7 @@ export const products: Product[] = [
     description: 'O clássico que iniciou a saga',
     category: 'RPG',
     type: 'individual',
-    online: false
+    online: true
   },
   {
     id: 'dark-souls-2',
@@ -464,7 +464,7 @@ export const products: Product[] = [
     description: 'A continuação desafiadora',
     category: 'RPG',
     type: 'individual',
-    online: false
+    online: true
   },
   {
     id: 're-2-remake',
