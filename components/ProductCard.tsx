@@ -3,6 +3,7 @@
 import { Product } from '@/data/products'
 import { useCartStore } from '@/store/cartStore'
 import { useToastStore } from '@/store/toastStore'
+import { useConfirmStore } from '@/store/confirmStore'
 import { FiShoppingCart, FiStar, FiPackage, FiWifi, FiWifiOff } from 'react-icons/fi'
 import { useState } from 'react'
 
@@ -13,13 +14,29 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const addToCart = useCartStore((state) => state.addItem)
   const addToast = useToastStore((state) => state.addToast)
+  const showConfirm = useConfirmStore((state) => state.showConfirm)
   const [isAdding, setIsAdding] = useState(false)
 
   const handleAddToCart = () => {
-    setIsAdding(true)
-    addToCart(product)
-    addToast(product.name)
-    setTimeout(() => setIsAdding(false), 600)
+    const result = addToCart(product, false)
+    
+    if (result.needsConfirm && result.message) {
+      showConfirm(
+        'Confirmar Adição',
+        result.message,
+        product,
+        () => {
+          addToCart(product, true)
+          setIsAdding(true)
+          addToast(`${product.name} adicionado ao carrinho!`, 'success')
+          setTimeout(() => setIsAdding(false), 600)
+        }
+      )
+    } else {
+      setIsAdding(true)
+      addToast(`${product.name} adicionado ao carrinho!`, 'success')
+      setTimeout(() => setIsAdding(false), 600)
+    }
   }
 
   const isPack = product.type === 'pack'

@@ -2,14 +2,18 @@
 
 import Link from 'next/link'
 import { useCartStore } from '@/store/cartStore'
-import { FiShoppingCart, FiMenu, FiX } from 'react-icons/fi'
+import { useAuth } from '@/lib/auth'
+import { FiShoppingCart, FiMenu, FiX, FiUser, FiLogOut } from 'react-icons/fi'
 import { SiDiscord } from 'react-icons/si'
 import { useState } from 'react'
 import Logo from './Logo'
+import LoginModal from './LoginModal'
 
 export default function Header() {
   const itemCount = useCartStore((state) => state.items.length)
+  const { user, isAuthenticated, logout } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [loginModalOpen, setLoginModalOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur-md border-b border-primary/10">
@@ -50,6 +54,33 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-3">
+            {isAuthenticated ? (
+              <div className="hidden lg:flex items-center space-x-2">
+                <Link
+                  href="/perfil"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-bg-tertiary hover:bg-primary/20 transition-all"
+                >
+                  <FiUser size={18} />
+                  <span className="text-sm font-medium text-text">{user?.name}</span>
+                </Link>
+                <button
+                  onClick={logout}
+                  className="p-2 rounded-lg bg-bg-tertiary hover:bg-danger/20 transition-all text-danger"
+                  title="Sair"
+                >
+                  <FiLogOut size={18} />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setLoginModalOpen(true)}
+                className="hidden lg:flex items-center space-x-2 px-4 py-2 rounded-lg bg-bg-tertiary hover:bg-primary/20 transition-all font-medium"
+              >
+                <FiUser size={18} />
+                <span>Entrar</span>
+              </button>
+            )}
+            
             <Link 
               href="/carrinho" 
               className="relative flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover transition-all font-semibold group"
@@ -109,6 +140,8 @@ export default function Header() {
           </nav>
         )}
       </div>
+      
+      <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} />
     </header>
   )
 }

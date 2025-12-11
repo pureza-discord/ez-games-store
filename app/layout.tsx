@@ -3,6 +3,7 @@ import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ToastContainer from '@/components/ToastContainer'
+import ConfirmDialog from '@/components/ConfirmDialog'
 
 export const metadata: Metadata = {
   title: 'Ez Games - Sua Loja de Jogos Premium',
@@ -24,6 +25,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <ToastContainer />
+        <ConfirmDialog />
       </body>
     </html>
   )

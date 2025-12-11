@@ -2,14 +2,20 @@
 
 import { useState } from 'react'
 import { useCartStore } from '@/store/cartStore'
+import { useCouponStore } from '@/store/couponStore'
 import { FiLock, FiCreditCard, FiDollarSign } from 'react-icons/fi'
 import Link from 'next/link'
 import PaymentForm from '@/components/PaymentForm'
+import CouponInput from '@/components/CouponInput'
 
 export default function CheckoutPage() {
   const { items, getTotal } = useCartStore()
+  const { getDiscount } = useCouponStore()
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix' | null>(null)
-  const total = getTotal()
+  
+  const subtotal = getTotal()
+  const discount = getDiscount(subtotal)
+  const total = subtotal - discount.amount
 
   if (items.length === 0) {
     return (
@@ -85,29 +91,51 @@ export default function CheckoutPage() {
         </div>
         
         <div className="lg:col-span-1">
-          <div className="bg-bg-secondary rounded-xl p-6 border border-primary/10 sticky top-24">
-            <h2 className="text-xl font-bold mb-6 text-text">Resumo</h2>
-            
-            <div className="space-y-3 mb-6">
-              {items.map((item) => (
-                <div key={item.id} className="flex justify-between text-sm">
-                  <span className="text-text-secondary">
-                    {item.name} ×{item.quantity}
-                  </span>
+          <div className="bg-bg-secondary rounded-xl p-6 border border-primary/10 sticky top-24 space-y-6">
+            <div>
+              <h2 className="text-xl font-bold mb-6 text-text">Resumo</h2>
+              
+              <div className="space-y-3 mb-6">
+                {items.map((item) => (
+                  <div key={item.id} className="flex justify-between text-sm">
+                    <span className="text-text-secondary">
+                      {item.name} ×{item.quantity}
+                    </span>
+                    <span className="text-text font-medium">
+                      R$ {(item.price * item.quantity).toFixed(2).replace('.', ',')}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-3 border-t border-primary/10 pt-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-text-secondary">Subtotal</span>
                   <span className="text-text font-medium">
-                    R$ {(item.price * item.quantity).toFixed(2).replace('.', ',')}
+                    R$ {subtotal.toFixed(2).replace('.', ',')}
                   </span>
                 </div>
-              ))}
-            </div>
-            
-            <div className="border-t border-primary/10 pt-4">
-              <div className="flex justify-between items-center">
-                <span className="text-text-secondary">Total</span>
-                <span className="text-2xl font-bold gradient-text">
-                  R$ {total.toFixed(2).replace('.', ',')}
-                </span>
+                
+                {discount.amount > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-accent font-semibold">Desconto</span>
+                    <span className="text-accent font-semibold">
+                      -R$ {discount.amount.toFixed(2).replace('.', ',')}
+                    </span>
+                  </div>
+                )}
+                
+                <div className="flex justify-between items-center pt-3 border-t border-primary/10">
+                  <span className="text-text-secondary font-semibold">Total</span>
+                  <span className="text-2xl font-bold gradient-text">
+                    R$ {total.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
               </div>
+            </div>
+
+            <div className="border-t border-primary/10 pt-6">
+              <CouponInput cartTotal={subtotal} />
             </div>
           </div>
         </div>
