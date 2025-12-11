@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const mercadopagoService = require('./mercadopagoService')
 const paymentLogger = require('./paymentLogger')
+const discordNotifier = require('./discordNotifier')
 
 const pendingPayments = new Map()
 
@@ -98,8 +99,8 @@ class PaymentService {
           status: 'pending',
           createdAt: new Date().toISOString(),
           customerInfo: {
-            email: payer?.email || 'cliente@ezgames.com',
-            name: `${payer?.firstName || 'Cliente'} ${payer?.lastName || 'Ez Games'}`
+            email: 'cliente@ezgames.com',
+            name: 'Cliente Ez Games'
           }
         })
 

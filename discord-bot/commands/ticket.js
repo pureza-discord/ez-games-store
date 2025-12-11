@@ -4,7 +4,7 @@ const config = require('../config')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('ticket')
-    .setDescription('Abre um ticket de suporte')
+    .setDescription('🎫 Abra um ticket de suporte privado com nossa equipe')
     .addStringOption(option =>
       option.setName('motivo')
         .setDescription('Motivo do ticket')

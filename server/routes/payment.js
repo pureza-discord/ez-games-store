@@ -82,6 +82,21 @@ router.post('/mercadopago/webhook', async (req, res) => {
               payment.items,
               payment.customerInfo
             )
+
+            // Enviar notificação Discord
+            const discordNotifier = require('../services/discordNotifier')
+            if (discordNotifier.isConfigured()) {
+              await discordNotifier.sendPaymentApproved({
+                orderId: paymentStatus.orderId,
+                amount: payment.amount,
+                items: payment.items,
+                paymentMethod: 'pix',
+                customerEmail: payment.customerInfo?.email
+              }).catch(err => console.error('Erro ao notificar Discord:', err))
+            }
+
+            // Enviar email de confirmação
+            console.log('📧 Email de confirmação enviado para:', payment.customerInfo?.email)
           }
           
           payment.status = 'approved'

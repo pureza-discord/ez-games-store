@@ -68,11 +68,18 @@ client.on('interactionCreate', async interaction => {
       }
     }
   } else if (interaction.isButton()) {
-    // Lidar com botões de tickets, etc
+    // Lidar com botões
     if (interaction.customId.startsWith('ticket_')) {
       const ticketHandler = require('./handlers/ticketHandler')
       await ticketHandler.handleButton(interaction)
+    } else {
+      const buttonHandler = require('./handlers/buttonHandler')
+      await buttonHandler.handleButton(interaction)
     }
+  } else if (interaction.isStringSelectMenu()) {
+    // Lidar com select menus
+    const buttonHandler = require('./handlers/buttonHandler')
+    await buttonHandler.handleButton(interaction)
   }
 })
 
