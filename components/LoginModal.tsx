@@ -53,38 +53,32 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   if (!isOpen) return null
 
   return (
-    <>
-      <style jsx global>{`
-        body {
-          overflow: ${isOpen ? 'hidden' : 'auto'};
+    <div 
+      className="fixed inset-0 flex items-center justify-center bg-black/90 backdrop-blur-md animate-fade-in overflow-y-auto py-8"
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 999999,
+        margin: 0,
+        padding: '2rem'
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          handleClose()
         }
-      `}</style>
+      }}
+    >
       <div 
-        className="fixed inset-0 flex items-center justify-center bg-black/90 backdrop-blur-md animate-fade-in overflow-y-auto py-8"
+        className="bg-gradient-to-br from-bg-secondary to-bg-tertiary border-2 border-primary/40 rounded-3xl p-10 max-w-lg w-full shadow-2xl m-auto"
         style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 999999,
-          margin: 0,
-          padding: '2rem'
+          position: 'relative',
+          zIndex: 1000000
         }}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            handleClose()
-          }
-        }}
+        onClick={(e) => e.stopPropagation()}
       >
-        <div 
-          className="bg-gradient-to-br from-bg-secondary to-bg-tertiary border-2 border-primary/40 rounded-3xl p-10 max-w-lg w-full shadow-2xl m-auto"
-          style={{ 
-            position: 'relative',
-            zIndex: 1000000
-          }}
-          onClick={(e) => e.stopPropagation()}
-        >
         {/* Header do Modal */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
