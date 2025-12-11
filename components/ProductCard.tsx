@@ -4,20 +4,32 @@ import { Product } from '@/data/products'
 import { useCartStore } from '@/store/cartStore'
 import { useToastStore } from '@/store/toastStore'
 import { useConfirmStore } from '@/store/confirmStore'
+import { useAuth } from '@/lib/auth'
 import { FiShoppingCart, FiStar, FiPackage, FiWifi, FiWifiOff } from 'react-icons/fi'
 import { useState } from 'react'
 
 interface ProductCardProps {
   product: Product
+  onLoginRequired?: () => void
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, onLoginRequired }: ProductCardProps) {
   const addToCart = useCartStore((state) => state.addItem)
   const addToast = useToastStore((state) => state.addToast)
   const showConfirm = useConfirmStore((state) => state.showConfirm)
+  const { isAuthenticated } = useAuth()
   const [isAdding, setIsAdding] = useState(false)
 
   const handleAddToCart = () => {
+    // Verificar se está logado antes de adicionar
+    if (!isAuthenticated) {
+      addToast('Faça login para adicionar produtos ao carrinho', 'warning')
+      if (onLoginRequired) {
+        onLoginRequired()
+      }
+      return
+    }
+
     const result = addToCart(product, false)
     
     if (result.needsConfirm && result.message) {
