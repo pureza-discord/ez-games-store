@@ -19,8 +19,8 @@ export default function ConfirmDialog() {
   }
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-bg-secondary border-2 border-primary/30 rounded-2xl p-6 max-w-md w-full mx-4 animate-scale-in shadow-2xl">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in p-4 overflow-y-auto">
+      <div className="bg-bg-secondary border-2 border-primary/30 rounded-2xl p-6 max-w-md w-full my-auto animate-scale-in shadow-2xl">
         <div className="flex items-start gap-4 mb-6">
           <div className="flex-shrink-0 w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
             <FiAlertCircle size={24} className="text-yellow-500" />

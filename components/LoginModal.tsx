@@ -48,8 +48,8 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-bg-secondary border-2 border-primary/30 rounded-2xl p-8 max-w-md w-full mx-4 animate-scale-in shadow-2xl">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-fade-in p-4 overflow-y-auto">
+      <div className="bg-bg-secondary border-2 border-primary/30 rounded-2xl p-8 max-w-md w-full my-auto animate-scale-in shadow-2xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold gradient-text">
             {isLogin ? 'Entrar' : 'Criar Conta'}
