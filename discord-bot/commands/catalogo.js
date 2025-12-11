@@ -23,6 +23,18 @@ module.exports = {
     await interaction.deferReply()
 
     const categoria = interaction.options.getString('categoria')
+    
+    // Determinar quais embeds mostrar baseado na categoria
+    let embedsToShow = []
+    let titleSuffix = ''
+    
+    if (categoria === 'pacotes') {
+      titleSuffix = ' - PACOTES'
+    } else if (categoria === 'populares') {
+      titleSuffix = ' - MAIS POPULARES'
+    } else if (categoria) {
+      titleSuffix = ` - ${categoria.toUpperCase()}`
+    }
 
     // Embed principal - Hero
     const mainEmbed = new EmbedBuilder()
@@ -31,10 +43,13 @@ module.exports = {
         name: 'Ez Games Store',
         iconURL: 'https://cdn.discordapp.com/icons/your-server-id/icon.png'
       })
-      .setTitle('🎮 CATÁLOGO PREMIUM DE JOGOS')
+      .setTitle(`🎮 CATÁLOGO PREMIUM DE JOGOS${titleSuffix}`)
       .setDescription('╔═══════════════════════════════╗\n║  **Mais de 100 jogos disponíveis!**  ║\n╚═══════════════════════════════╝\n\n🌟 *Qualidade garantida | Entrega imediata | Suporte 24/7*')
       .setImage('https://via.placeholder.com/800x200/6366f1/ffffff?text=Ez+Games+Store')
       .setThumbnail('https://via.placeholder.com/150/10b981/ffffff?text=EZ')
+    
+    // Adicionar embeds baseado na categoria selecionada
+    embedsToShow.push(mainEmbed)
 
     // Embed de Pacotes
     const pacotesEmbed = new EmbedBuilder()
@@ -230,8 +245,24 @@ module.exports = {
           ])
       )
 
+    // Filtrar embeds baseado na categoria
+    if (!categoria || categoria === 'pacotes') {
+      embedsToShow.push(pacotesEmbed)
+    }
+    
+    if (!categoria || categoria === 'populares') {
+      embedsToShow.push(destaquesEmbed)
+    }
+    
+    if (!categoria) {
+      embedsToShow.push(categoriasEmbed)
+    }
+    
+    // Sempre mostrar embed de info
+    embedsToShow.push(infoEmbed)
+
     await interaction.editReply({
-      embeds: [mainEmbed, pacotesEmbed, destaquesEmbed, categoriasEmbed, infoEmbed],
+      embeds: embedsToShow,
       components: [selectMenu, row1, row2]
     })
   }

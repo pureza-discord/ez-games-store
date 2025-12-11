@@ -5,7 +5,7 @@ module.exports = {
   async handleButton(interaction) {
     const customId = interaction.customId
 
-    // Handlers específicos
+    // Handlers específicos para TODOS os botões customizados
     const handlers = {
       'ticket_create': () => this.showTicketPrompt(interaction),
       'payment_info': () => this.showPaymentInfo(interaction),
@@ -20,11 +20,21 @@ module.exports = {
       'catalog_popular': () => this.showPopular(interaction),
       'catalog_promo': () => this.showPromo(interaction),
       'catalog_info': () => this.showCatalogInfo(interaction),
+      'show_tutorials': () => this.showTutorial(interaction),
+      'live_chat': () => this.showLiveChat(interaction),
+      'catalog_category': () => this.handleCategorySelect(interaction),
+      'support_category': () => this.handleSupportCategory(interaction),
     }
 
     const handler = handlers[customId]
     if (handler) {
       await handler()
+    } else {
+      console.log(`⚠️ Handler não encontrado para: ${customId}`)
+      await interaction.reply({ 
+        content: '⚠️ Esta função ainda está em desenvolvimento!', 
+        ephemeral: true 
+      })
     }
   },
 
@@ -148,6 +158,55 @@ module.exports = {
       .setColor('#6366f1')
       .setTitle('ℹ️ INFORMAÇÕES DO CATÁLOGO')
       .setDescription('```\nTotal de Jogos:      100+\nPacotes:             30+\nJogos Individuais:   70+\nCategorias:          10\n```\n\n**Destaques:**\n✓ Lançamentos recentes\n✓ Clássicos atemporais\n✓ Indies premiados\n✓ AAA com desconto')
+
+    await interaction.reply({ embeds: [embed], ephemeral: true })
+  },
+
+  async showLiveChat(interaction) {
+    const embed = new EmbedBuilder()
+      .setColor('#10b981')
+      .setTitle('💬 Chat ao Vivo')
+      .setDescription('Para falar com nossa equipe em tempo real, abra um ticket usando:\n\n`/ticket motivo:duvida`\n\nUm membro da equipe responderá em minutos!')
+
+    await interaction.reply({ embeds: [embed], ephemeral: true })
+  },
+
+  async handleCategorySelect(interaction) {
+    const category = interaction.values[0]
+    
+    const embed = new EmbedBuilder()
+      .setColor('#7c3aed')
+      .setTitle(`📂 Categoria: ${category.toUpperCase()}`)
+      .setDescription(`Filtrando jogos por **${category}**...\n\nPara ver o catálogo completo filtrado, visite nosso site!`)
+
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setLabel('🛒 Ver no Site')
+          .setStyle(ButtonStyle.Link)
+          .setURL(config.siteUrl)
+      )
+
+    await interaction.reply({ embeds: [embed], components: [row], ephemeral: true })
+  },
+
+  async handleSupportCategory(interaction) {
+    const category = interaction.values[0]
+    
+    const categoryInfo = {
+      'purchase': { title: 'Dúvidas sobre Compra', emoji: '💳' },
+      'technical': { title: 'Problemas Técnicos', emoji: '🔧' },
+      'delivery': { title: 'Entrega de Jogos', emoji: '📦' },
+      'refund': { title: 'Reembolso/Troca', emoji: '🔄' },
+      'other': { title: 'Outros Assuntos', emoji: '📝' }
+    }
+
+    const info = categoryInfo[category] || categoryInfo['other']
+
+    const embed = new EmbedBuilder()
+      .setColor('#f59e0b')
+      .setTitle(`${info.emoji} ${info.title}`)
+      .setDescription(`Para obter ajuda sobre **${info.title}**, abra um ticket:\n\n\`/ticket motivo:${category}\`\n\nNossa equipe te atenderá em minutos!`)
 
     await interaction.reply({ embeds: [embed], ephemeral: true })
   }

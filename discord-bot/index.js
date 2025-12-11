@@ -68,18 +68,39 @@ client.on('interactionCreate', async interaction => {
       }
     }
   } else if (interaction.isButton()) {
-    // Lidar com botões
-    if (interaction.customId.startsWith('ticket_')) {
-      const ticketHandler = require('./handlers/ticketHandler')
-      await ticketHandler.handleButton(interaction)
-    } else {
-      const buttonHandler = require('./handlers/buttonHandler')
-      await buttonHandler.handleButton(interaction)
+    // Lidar com botões - roteamento atualizado para todos os tipos
+    try {
+      if (interaction.customId.startsWith('ticket_')) {
+        const ticketHandler = require('./handlers/ticketHandler')
+        await ticketHandler.handleButton(interaction)
+      } else {
+        // Todos os outros botões (payment_info, show_catalog, show_tutorial, etc)
+        const buttonHandler = require('./handlers/buttonHandler')
+        await buttonHandler.handleButton(interaction)
+      }
+    } catch (error) {
+      console.error('Erro ao lidar com botão:', error)
+      if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({ 
+          content: '❌ Erro ao processar ação. Tente novamente.', 
+          ephemeral: true 
+        })
+      }
     }
   } else if (interaction.isStringSelectMenu()) {
     // Lidar com select menus
-    const buttonHandler = require('./handlers/buttonHandler')
-    await buttonHandler.handleButton(interaction)
+    try {
+      const buttonHandler = require('./handlers/buttonHandler')
+      await buttonHandler.handleButton(interaction)
+    } catch (error) {
+      console.error('Erro ao lidar com select menu:', error)
+      if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({ 
+          content: '❌ Erro ao processar seleção. Tente novamente.', 
+          ephemeral: true 
+        })
+      }
+    }
   }
 })
 
