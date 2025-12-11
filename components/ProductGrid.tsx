@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Product, categories } from '@/data/products'
 import ProductCard from './ProductCard'
+import LoginModal from './LoginModal'
 import { FiPackage, FiZap, FiStar } from 'react-icons/fi'
 import SearchIcon from './icons/SearchIcon'
 
@@ -13,6 +14,7 @@ interface ProductGridProps {
 export default function ProductGrid({ products }: ProductGridProps) {
   const [selectedTab, setSelectedTab] = useState<'popular' | 'pack' | 'individual'>('pack')
   const [selectedCategory, setSelectedCategory] = useState('Todos')
+  const [showLoginModal, setShowLoginModal] = useState(false)
 
   const filteredProducts = products.filter(product => {
     const categoryMatch = selectedCategory === 'Todos' || product.category === selectedCategory
