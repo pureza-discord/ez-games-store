@@ -85,7 +85,7 @@ module.exports = {
         },
         {
           name: '🎟️ Cupons de Desconto',
-          value: '**Aplique no checkout:**\n`PRIMEIRACOMPRA` → **15% OFF**\n`BLACKFRIDAY` → **20% OFF**\n`DESCONTO10` → **R$ 10 OFF**\n`VIP20` → **25% OFF**\n`BEMVINDO` → **R$ 5 OFF**',
+          value: '**Aplique no checkout:**\n`PRIMEIRACOMPRA` → **15% OFF** (mín R$ 30)\n`BLACKFRIDAY` → **20% OFF** (mín R$ 50)\n`DESCONTO10` → **R$ 10 OFF** (mín R$ 40)',
           inline: false
         },
         {

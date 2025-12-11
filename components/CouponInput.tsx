@@ -89,7 +89,7 @@ export default function CouponInput({ cartTotal }: CouponInputProps) {
       
       <div className="bg-primary/5 border border-primary/10 rounded-lg p-3">
         <p className="text-xs text-text-secondary">
-          <strong className="text-primary">Cupons disponíveis:</strong> PRIMEIRACOMPRA, BLACKFRIDAY, DESCONTO10, VIP20, BEMVINDO
+          <strong className="text-primary">Cupons disponíveis:</strong> PRIMEIRACOMPRA, BLACKFRIDAY, DESCONTO10
         </p>
       </div>
     </div>

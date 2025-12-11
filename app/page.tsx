@@ -1,18 +1,40 @@
 'use client'
 
+import { useState } from 'react'
 import Hero from '@/components/Hero'
 import ProductGrid from '@/components/ProductGrid'
+import SearchBar from '@/components/SearchBar'
 import { products } from '@/data/products'
 import GuideIcon from '@/components/icons/GuideIcon'
 import SupportIcon from '@/components/icons/SupportIcon'
 
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState('')
+  
+  const filteredProducts = searchTerm
+    ? products.filter(p => 
+        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : products
+
   return (
     <div className="w-full">
       <Hero />
       
       <div className="container mx-auto px-4 py-12">
-        <ProductGrid products={products} />
+        <SearchBar onSearch={setSearchTerm} />
+        
+        {searchTerm && (
+          <div className="mb-6 text-center">
+            <p className="text-text-secondary">
+              Encontrados <span className="text-primary font-bold">{filteredProducts.length}</span> jogos para "{searchTerm}"
+            </p>
+          </div>
+        )}
+        
+        <ProductGrid products={filteredProducts} />
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-bg-secondary rounded-xl p-8 border border-primary/10 hover:border-primary/20 transition-all">

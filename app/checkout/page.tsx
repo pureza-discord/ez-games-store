@@ -1,21 +1,60 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { useCartStore } from '@/store/cartStore'
 import { useCouponStore } from '@/store/couponStore'
-import { FiLock, FiCreditCard, FiDollarSign } from 'react-icons/fi'
+import { useAuth } from '@/lib/auth'
+import { FiLock, FiCreditCard, FiDollarSign, FiUser } from 'react-icons/fi'
 import Link from 'next/link'
 import PaymentForm from '@/components/PaymentForm'
 import CouponInput from '@/components/CouponInput'
+import LoginModal from '@/components/LoginModal'
 
 export default function CheckoutPage() {
+  const router = useRouter()
   const { items, getTotal } = useCartStore()
   const { getDiscount } = useCouponStore()
+  const { isAuthenticated, user } = useAuth()
   const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix' | null>(null)
+  const [showLoginModal, setShowLoginModal] = useState(false)
   
   const subtotal = getTotal()
   const discount = getDiscount(subtotal)
   const total = subtotal - discount.amount
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setShowLoginModal(true)
+    }
+  }, [isAuthenticated])
+
+  // Verificar autenticação
+  if (!isAuthenticated) {
+    return (
+      <>
+        <div className="container mx-auto px-4 py-20">
+          <div className="max-w-2xl mx-auto text-center bg-bg-secondary rounded-2xl p-12 border border-primary/10">
+            <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <FiLock size={40} className="text-primary" />
+            </div>
+            <h2 className="text-3xl font-bold mb-4 text-text">Faça Login Para Continuar</h2>
+            <p className="text-text-secondary mb-8">
+              Para finalizar sua compra, você precisa estar logado em uma conta.
+            </p>
+            <button
+              onClick={() => setShowLoginModal(true)}
+              className="btn-primary inline-block"
+            >
+              <FiUser className="inline mr-2" />
+              Fazer Login / Cadastrar
+            </button>
+          </div>
+        </div>
+        <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      </>
+    )
+  }
 
   if (items.length === 0) {
     return (
@@ -140,6 +179,8 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+      
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </div>
   )
 }

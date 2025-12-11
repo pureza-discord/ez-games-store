@@ -100,7 +100,7 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor('#ec4899')
       .setTitle('🎁 CUPONS DE DESCONTO DISPONÍVEIS')
-      .setDescription('```\nCódigo            Desconto        Mínimo\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPRIMEIRACOMPRA    15% OFF         R$ 30\nBLACKFRIDAY       20% OFF         R$ 50\nDESCONTO10        R$ 10 OFF       R$ 40\nVIP20             25% OFF         R$ 100\nBEMVINDO          R$ 5 OFF        R$ 20\n```\n\n**Como usar:**\n1. Adicione jogos ao carrinho\n2. Vá para checkout\n3. Digite o cupom\n4. Desconto aplicado!')
+      .setDescription('```\nCódigo            Desconto        Mínimo\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nPRIMEIRACOMPRA    15% OFF         R$ 30\nBLACKFRIDAY       20% OFF         R$ 50\nDESCONTO10        R$ 10 OFF       R$ 40\n```\n\n**Como usar:**\n1. Faça login/cadastro no site\n2. Adicione jogos ao carrinho\n3. Vá para checkout\n4. Digite o cupom\n5. Desconto aplicado automaticamente!')
 
     await interaction.reply({ embeds: [embed], ephemeral: true })
   },

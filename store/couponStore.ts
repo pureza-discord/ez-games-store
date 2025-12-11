@@ -39,20 +39,6 @@ const availableCoupons: Coupon[] = [
     value: 10,
     minPurchase: 40,
     active: true
-  },
-  {
-    code: 'VIP20',
-    type: 'percentage',
-    value: 25,
-    minPurchase: 100,
-    active: true
-  },
-  {
-    code: 'BEMVINDO',
-    type: 'fixed',
-    value: 5,
-    minPurchase: 20,
-    active: true
   }
 ]
 
