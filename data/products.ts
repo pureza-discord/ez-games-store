@@ -94,12 +94,12 @@ export const products: Product[] = [
     id: 'witcher',
     name: "The Witcher Complete",
     price: 30.00,
-    description: 'Trilogia completa: The Witcher 1, 2, 3 GOTY',
+    description: 'Trilogia completa: The Witcher 1, 2 e 3',
     category: 'RPG',
     popular: true,
     type: 'pack',
     online: false,
-    games: ['The Witcher 1', 'The Witcher 2', 'The Witcher 3 GOTY']
+    games: ['The Witcher 1', 'The Witcher 2', 'The Witcher 3']
   },
   {
     id: 'elder-scrolls',
@@ -197,14 +197,14 @@ export const products: Product[] = [
   },
   {
     id: 'sims-4',
-    name: "The Sims 4 Complete",
+    name: "The Sims 4",
     price: 30.00,
-    description: 'The Sims 4 + Todas as expansões e pacotes',
+    description: 'The Sims 4 - Jogo base completo',
     category: 'Simulação',
     popular: true,
     type: 'pack',
     online: false,
-    games: ['The Sims 4 Base + Todas DLCs']
+    games: ['The Sims 4']
   },
   {
     id: 'total-war',
@@ -218,19 +218,19 @@ export const products: Product[] = [
   },
   {
     id: 'civilization',
-    name: "Civilization Complete",
+    name: "Civilization Pack",
     price: 30.00,
-    description: 'Civilization V Complete + Civilization VI Anthology',
+    description: 'Civilization V + Civilization VI',
     category: 'Estratégia',
     type: 'pack',
     online: false,
-    games: ['Civilization V Complete', 'Civilization VI Anthology']
+    games: ['Civilization V', 'Civilization VI']
   },
   {
     id: 'dark-souls-trilogy',
     name: "Dark Souls Trilogy",
     price: 30.00,
-    description: 'Dark Souls I Remastered, II Scholar, III Complete',
+    description: 'Dark Souls I Remastered, II Scholar of the First Sin, III',
     category: 'RPG',
     type: 'pack',
     online: false,
@@ -282,7 +282,7 @@ export const products: Product[] = [
     id: 'horizon',
     name: "Horizon Bundle",
     price: 30.00,
-    description: 'Horizon Zero Dawn Complete + Forbidden West Complete',
+    description: 'Horizon Zero Dawn + Horizon Forbidden West',
     category: 'Aventura',
     popular: true,
     type: 'pack',
@@ -314,7 +314,7 @@ export const products: Product[] = [
     id: 'dragon-age',
     name: "Dragon Age Trilogy",
     price: 30.00,
-    description: 'Dragon Age Origins, II, Inquisition GOTY',
+    description: 'Dragon Age Origins, II e Inquisition',
     category: 'RPG',
     type: 'pack',
     online: false,
